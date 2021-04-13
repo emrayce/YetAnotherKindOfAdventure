@@ -2,11 +2,12 @@ Here are the rules that I need to respect for my commits:
 [LABEL]: [ISSUE]: [description]
 
 LABEL: [A-Z][A-Za-Z]*
-ADD -> Adding a file or a new feature.
+ADD/RM -> Adding/removing a file or a new feature.
 FIX -> Modifications of the behaviour of the code.
 REFACTOR -> Modifications of the code's display (Rename variable, put pieces of code in a new method, etc...).
 REFACTOR/ADD -> When the refactor lead to the creation of new files.
 COMMENTS -> Modifications of comments only.
+GIT -> Modifications specific to git files/architecture (eg updating .gitignore, removing folders...)
 
 ISSUE: [0-9]*
 The ID of the issue the commit belongs to.
