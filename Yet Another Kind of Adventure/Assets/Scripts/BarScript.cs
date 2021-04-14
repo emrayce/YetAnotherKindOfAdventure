@@ -11,15 +11,15 @@ public class BarScript : MonoBehaviour
     [SerializeField]
     public Text value;
 
-    public void SetMaxValue(int health)
+    public void SetMaxValue(int value)
     {
-        slider.maxValue = health;
-        slider.value = health;
-        value.text = health + "/" + health;
+        slider.maxValue = value;
+        slider.value = value;
+        this.value.text = value + "/" + value;
     }
-    public void SetValue(int health)
+    public void SetValue(int value)
     {
-        slider.value = health;
-        value.text = health + "/" + slider.maxValue;
+        slider.value = value;
+        this.value.text = value + "/" + slider.maxValue;
     }
 }
