@@ -26,7 +26,17 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetMaxHealth(hpMax + 10);
+            SetMaxMana(manaMax + 10);
+        }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetHealth(hp - 10);
+            SetMana(mana - 10);
+        }
     }
 
     // Call it when modifying current health (eg: taking damage)
@@ -47,13 +57,15 @@ public class Unit : MonoBehaviour
     // Call it when modifying current mana (eg: casting a spell)
     private void SetMana(int value)
     {
-        hp = value;
+        mana = value;
+        manabar.SetValue(value);
     }
 
     // Call it when modifying max mana (eg: Lvl up)
     private void SetMaxMana(int value)
     {
-        hpMax = value;
-        hp = value;
+        manaMax = value;
+        mana = value;
+        manabar.SetMaxValue(value);
     }
 }
