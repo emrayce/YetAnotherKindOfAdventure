@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class BarScript : MonoBehaviour
 {
-    [SerializeField]
     public Slider slider;
 
-    [SerializeField]
     public Text value;
 
     public void SetMaxValue(int value)
