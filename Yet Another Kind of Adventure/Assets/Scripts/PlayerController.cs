@@ -21,6 +21,25 @@ public class PlayerController : Unit
         manabar.SetValue(mana);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            hpMax += 10;
+            manaMax += 10;
+            SetMaxHealth(hpMax);
+            SetHealth(hpMax);
+            SetMaxMana(manaMax);
+            SetMana(manaMax);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetHealth(hp - 10);
+            SetMana(mana - 10);
+        }
+    }
+
     // Update is called once per frame
     protected void FixedUpdate()
     {
@@ -41,22 +60,6 @@ public class PlayerController : Unit
                 transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
                 transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            hpMax += 10;
-            manaMax += 10;
-            SetMaxHealth(hpMax);
-            SetHealth(hpMax);
-            SetMaxMana(manaMax);
-            SetMana(manaMax);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetHealth(hp - 10);
-            SetMana(mana - 10);
         }
     }
 
