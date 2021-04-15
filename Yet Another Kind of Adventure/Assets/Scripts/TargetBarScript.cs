@@ -9,7 +9,7 @@ public class TargetBarScript : BarScript
     private Unit target;
 
     [SerializeField]
-    private Text name;
+    private Text targetName;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class TargetBarScript : BarScript
     public void SetUnit(Unit unit)
     {
         target = unit;
-        name.text = unit.name;
+        targetName.text = unit.name;
         SetMaxValue(target.GetHpMax());
         SetValue(target.GetHp());
     }
