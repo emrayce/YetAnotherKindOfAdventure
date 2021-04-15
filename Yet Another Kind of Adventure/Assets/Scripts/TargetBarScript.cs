@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetBarScript : BarScript
 {
     // The target unit that we display
     private Unit target;
+
+    [SerializeField]
+    private Text name;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +22,14 @@ public class TargetBarScript : BarScript
     {
         if (target)
         {
-            slider.value = target.GetHp();
-            Debug.Log(slider.value);
+            SetValue(target.GetHp());
         }
     }
 
     public void SetUnit(Unit unit)
     {
         target = unit;
-        Debug.Log(unit.GetHp());
+        name.text = unit.name;
         SetMaxValue(target.GetHpMax());
         SetValue(target.GetHp());
     }

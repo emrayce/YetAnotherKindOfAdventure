@@ -30,7 +30,6 @@ public class DetectUnit : MonoBehaviour
             {
                 GameObject target = hit.transform.gameObject;
                 Unit unit = target.GetComponent<Unit>();
-                //Debug.Log(unit.GetHp());
                 targetBarScript.SetUnit(unit);
                 targetBar.SetActive(true);
             }
