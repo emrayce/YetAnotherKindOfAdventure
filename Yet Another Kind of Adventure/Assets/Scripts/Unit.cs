@@ -20,7 +20,8 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
+        hp = hpMax;
+        mana = manaMax;
     }
 
     // Update is called once per frame
@@ -53,5 +54,25 @@ public class Unit : MonoBehaviour
     {
         manaMax = value;
         mana = value;
+    }
+
+    public int GetHpMax()
+    {
+        return hpMax;
+    }
+
+    public int GetHp()
+    {
+        return hp;
+    }
+
+    public int GetManaMax()
+    {
+        return manaMax;
+    }
+
+    public int GetMana()
+    {
+        return mana;
     }
 }

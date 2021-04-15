@@ -14,8 +14,11 @@ public class PlayerController : Unit
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         healthbar.SetMaxValue(hpMax);
+        healthbar.SetValue(hp);
         manabar.SetMaxValue(manaMax);
+        manabar.SetValue(mana);
     }
 
     // Update is called once per frame
@@ -42,8 +45,12 @@ public class PlayerController : Unit
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SetMaxHealth(hpMax + 10);
-            SetMaxMana(manaMax + 10);
+            hpMax += 10;
+            manaMax += 10;
+            SetMaxHealth(hpMax);
+            SetHealth(hpMax);
+            SetMaxMana(manaMax);
+            SetMana(manaMax);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

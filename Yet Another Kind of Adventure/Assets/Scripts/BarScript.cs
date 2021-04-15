@@ -9,11 +9,10 @@ public class BarScript : MonoBehaviour
 
     public Text value;
 
-    public void SetMaxValue(int value)
+    public void SetMaxValue(int maxValue)
     {
-        slider.maxValue = value;
-        slider.value = value;
-        this.value.text = value + "/" + value;
+        slider.maxValue = maxValue;
+        this.value.text = slider.value + "/" + maxValue;
     }
     public void SetValue(int value)
     {
