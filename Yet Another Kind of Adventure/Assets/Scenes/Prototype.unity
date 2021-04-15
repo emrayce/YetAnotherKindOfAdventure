@@ -284,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 608353969}
   value: {fileID: 914210543}
-  name: {fileID: 1042798688}
+  targetName: {fileID: 1042798688}
 --- !u!114 &608353969 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7274735983918030678, guid: 788ce8e4e6b23a54fa13c30fa8b675ef,
