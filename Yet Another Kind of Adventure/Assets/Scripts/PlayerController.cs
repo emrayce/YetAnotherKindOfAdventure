@@ -19,7 +19,7 @@ public class PlayerController : Unit
     }
 
     // Update is called once per frame
-    protected override void Update()
+    protected void FixedUpdate()
     {
         Vector3 mouse = Input.mousePosition;
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
