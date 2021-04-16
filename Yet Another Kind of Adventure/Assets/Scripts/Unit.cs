@@ -61,6 +61,8 @@ public class Unit : MonoBehaviour
         mana = value;
     }
 
+
+    #region Getter
     public int GetHpMax()
     {
         return hpMax;
@@ -80,4 +82,11 @@ public class Unit : MonoBehaviour
     {
         return mana;
     }
+
+    public float GetRange()
+    {
+        return range;
+    }
+
+    #endregion
 }
