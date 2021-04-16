@@ -23,6 +23,7 @@ public class TargetBarScript : BarScript
         if (target)
         {
             SetValue(target.GetHp());
+            SetMaxValue(target.GetHpMax());
         }
     }
 
