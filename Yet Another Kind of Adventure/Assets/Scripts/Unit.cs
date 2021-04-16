@@ -13,8 +13,13 @@ public class Unit : MonoBehaviour
     [SerializeField]
     protected int strength, agility, intelligence;
 
+    // movement speed
     [SerializeField]
     protected float speed;
+
+    // minimal distance to attack
+    [SerializeField]
+    protected float range;
 
 
     // Start is called before the first frame update

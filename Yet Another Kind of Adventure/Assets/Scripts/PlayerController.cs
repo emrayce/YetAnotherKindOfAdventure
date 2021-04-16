@@ -2,45 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Unit
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private BarScript healthbar, manabar;
-
-
+    private Player player;
     public LayerMask layers;
-    public float distanceBeforeRunning;
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-        healthbar.SetMaxValue(hpMax);
-        healthbar.SetValue(hp);
-        manabar.SetMaxValue(manaMax);
-        manabar.SetValue(mana);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            hpMax += 10;
-            manaMax += 10;
-            SetMaxHealth(hpMax);
-            SetHealth(hpMax);
-            SetMaxMana(manaMax);
-            SetMana(manaMax);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetHealth(hp - 10);
-            SetMana(mana - 10);
-        }
-    }
-
-    // Update is called once per frame
     protected void FixedUpdate()
     {
         Vector3 mouse = Input.mousePosition;
@@ -51,46 +18,8 @@ public class PlayerController : Unit
         {
             if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
             {
-                float step = speed * Time.deltaTime;
-                if (Vector3.Distance(transform.position, hit.point) > distanceBeforeRunning)
-                {
-                    step *= 2;
-                }
-
-                transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-                transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
+                player.MoveTo(hit.point);
             }
         }
-    }
-
-
-    // Call it when modifying current health (eg: taking damage)
-    protected override void SetHealth(int value)
-    {
-        hp = value;
-        healthbar.SetValue(value);
-    }
-
-    // Call it when modifying max health (eg: Lvl up)
-    protected override void SetMaxHealth(int value)
-    {
-        hpMax = value;
-        hp = value;
-        healthbar.SetMaxValue(value);
-    }
-
-    // Call it when modifying current mana (eg: casting a spell)
-    protected override void SetMana(int value)
-    {
-        mana = value;
-        manabar.SetValue(value);
-    }
-
-    // Call it when modifying max mana (eg: Lvl up)
-    protected override void SetMaxMana(int value)
-    {
-        manaMax = value;
-        mana = value;
-        manabar.SetMaxValue(value);
     }
 }
