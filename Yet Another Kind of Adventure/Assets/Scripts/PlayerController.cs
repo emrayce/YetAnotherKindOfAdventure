@@ -7,13 +7,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Player player;
 
-    public LayerMask movementLayers;
-    public LayerMask TargetLayers;
+    public LayerMask layers;
 
     [SerializeField]
     private GameObject targetBar;
     [SerializeField]
     private TargetBarScript targetBarScript;
+
+    // GameObject layers for raycast interractions
+    private const int UILayer = 5;
+    private const int GroundLayer = 8;
+    private const int UnitsLayer = 9;
+
 
     protected void FixedUpdate()
     {
@@ -21,30 +26,44 @@ public class PlayerController : MonoBehaviour
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
         RaycastHit hit;
 
-        Detect(castPoint);
-        
-        if (Input.GetMouseButton(0))
+        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
         {
-            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, movementLayers))
+            GameObject target = hit.transform.gameObject;
+            switch (target.layer)
             {
-                player.MoveTo(hit.point);
+                case UILayer:
+                    Debug.Log("Hi UI layer");
+                    // handle UI interraction here
+                    break;
+
+                case GroundLayer:
+                    Debug.Log("Hi ground layer");
+                    //handle pure movement;
+                    targetBar.SetActive(false);
+                    if (Input.GetMouseButton(0))
+                    {
+                        player.MoveTo(hit.point);
+                    }
+                    break;
+
+                case UnitsLayer:
+                    Debug.Log("Hi unit layer");
+                    DisplayTarget(target);
+                    // handle units interractions;
+                    break;
+
+                default:
+                    // do nothing for now (maybe put the UI here ?)
+                    Debug.Log("Hi " + target.name);
+                    break;
             }
         }
     }
 
-    private void Detect(Ray castPoint)
+    private void DisplayTarget(GameObject target)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, TargetLayers))
-        {
-            GameObject target = hit.transform.gameObject;
             Unit unit = target.GetComponent<Unit>();
             targetBarScript.SetUnit(unit);
             targetBar.SetActive(true);
-        }
-        else
-        {
-            targetBar.SetActive(false);
-        }
     }
 }
