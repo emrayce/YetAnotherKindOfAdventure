@@ -4,36 +4,47 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public LayerMask layers;
-    public float distanceBeforeRunning;
+    [SerializeField]
+    private Player player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public LayerMask movementLayers;
+    public LayerMask TargetLayers;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private GameObject targetBar;
+    [SerializeField]
+    private TargetBarScript targetBarScript;
+
+    protected void FixedUpdate()
     {
         Vector3 mouse = Input.mousePosition;
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
         RaycastHit hit;
 
+        Detect(castPoint);
+        
         if (Input.GetMouseButton(0))
         {
-            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
+            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, movementLayers))
             {
-                float step = speed * Time.deltaTime;
-                if (Vector3.Distance(transform.position, hit.point) > distanceBeforeRunning)
-                {
-                    step *= 2;
-                }
-
-                transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-                transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
+                player.MoveTo(hit.point);
             }
+        }
+    }
+
+    private void Detect(Ray castPoint)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, TargetLayers))
+        {
+            GameObject target = hit.transform.gameObject;
+            Unit unit = target.GetComponent<Unit>();
+            targetBarScript.SetUnit(unit);
+            targetBar.SetActive(true);
+        }
+        else
+        {
+            targetBar.SetActive(false);
         }
     }
 }

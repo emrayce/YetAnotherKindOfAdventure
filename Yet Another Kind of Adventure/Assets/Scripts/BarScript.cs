@@ -5,17 +5,14 @@ using UnityEngine.UI;
 
 public class BarScript : MonoBehaviour
 {
-    [SerializeField]
     public Slider slider;
 
-    [SerializeField]
     public Text value;
 
-    public void SetMaxValue(int value)
+    public void SetMaxValue(int maxValue)
     {
-        slider.maxValue = value;
-        slider.value = value;
-        this.value.text = value + "/" + value;
+        slider.maxValue = maxValue;
+        this.value.text = slider.value + "/" + maxValue;
     }
     public void SetValue(int value)
     {
