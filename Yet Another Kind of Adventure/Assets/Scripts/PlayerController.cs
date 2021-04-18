@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("Hi UI layer");
+            // handle specific UI interractions
         }
 
         else if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
             switch (target.layer)
             {
                 case GroundLayer:
-                    Debug.Log("Hi ground layer");
                     //handle pure movement;
                     targetBar.SetActive(false);
                     if (Input.GetMouseButton(0))
@@ -47,9 +46,23 @@ public class PlayerController : MonoBehaviour
                     break;
 
                 case UnitsLayer:
-                    Debug.Log("Hi unit layer");
                     DisplayTarget(target);
-                    // handle units interractions;
+                    if (Input.GetMouseButton(0))
+                    {
+                        if (target.CompareTag("Enemy"))
+                        {
+                            if (Vector3.Distance(player.transform.position, hit.point) > player.GetRange())
+                            {
+                                Physics.Raycast(castPoint, out hit, Mathf.Infinity, LayerMask.NameToLayer("Ground"));
+                                player.MoveTo(hit.point);
+                            }
+                            else
+                            {
+                                // Attack
+                            }
+                        }
+                    }
+                    // handle units interractions
                     break;
 
                 default:
