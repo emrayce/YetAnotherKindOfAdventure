@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
     private TargetBarScript targetBarScript;
 
     // GameObject layers for raycast interractions
-    private const int UILayer = 5;
     private const int GroundLayer = 8;
     private const int UnitsLayer = 9;
 
@@ -26,16 +26,16 @@ public class PlayerController : MonoBehaviour
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
         RaycastHit hit;
 
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Hi UI layer");
+        }
+
+        else if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
         {
             GameObject target = hit.transform.gameObject;
             switch (target.layer)
             {
-                case UILayer:
-                    Debug.Log("Hi UI layer");
-                    // handle UI interraction here
-                    break;
-
                 case GroundLayer:
                     Debug.Log("Hi ground layer");
                     //handle pure movement;
