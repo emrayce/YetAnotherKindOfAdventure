@@ -1275,7 +1275,7 @@ MonoBehaviour:
   player: {fileID: 1638540596}
   layers:
     serializedVersion: 2
-    m_Bits: 800
+    m_Bits: 768
   targetBar: {fileID: 608353966}
   targetBarScript: {fileID: 608353968}
 --- !u!54 &1638540595
