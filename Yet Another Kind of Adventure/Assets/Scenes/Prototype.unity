@@ -1312,7 +1312,7 @@ MonoBehaviour:
   agility: 10
   intelligence: 10
   speed: 3
-  range: 5
+  range: 7
   healthbar: {fileID: 2144336332}
   manabar: {fileID: 403288871}
   distanceBeforeRunning: 5

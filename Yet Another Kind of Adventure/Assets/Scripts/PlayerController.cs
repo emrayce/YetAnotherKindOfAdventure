@@ -47,15 +47,20 @@ public class PlayerController : MonoBehaviour
 
                 case UnitsLayer:
                     DisplayTarget(target);
+
                     if (Input.GetMouseButton(0))
                     {
                         if (target.CompareTag("Enemy"))
                         {
+                            // if too far from the enemy move towards him
                             if (Vector3.Distance(player.transform.position, hit.point) > player.GetRange())
                             {
-                                Physics.Raycast(castPoint, out hit, Mathf.Infinity, LayerMask.NameToLayer("Ground"));
-                                player.MoveTo(hit.point);
+                                if (Physics.Raycast(target.transform.position, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+                                {
+                                    player.MoveTo(hit.point);
+                                }
                             }
+                            // if enemy is in player's range stop moving and attack him
                             else
                             {
                                 // Attack
