@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         Ray castPoint = Camera.main.ScreenPointToRay(mouse);
         RaycastHit hit;
 
-        Detect(castPoint, out hit);
+        Detect(castPoint);
         
         if (Input.GetMouseButton(0))
         {
@@ -32,8 +32,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Detect(Ray castPoint, out RaycastHit hit)
+    private void Detect(Ray castPoint)
     {
+        RaycastHit hit;
         if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, TargetLayers))
         {
             GameObject target = hit.transform.gameObject;
