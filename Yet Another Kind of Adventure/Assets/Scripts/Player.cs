@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Unit
+public class Player : Fighter
 {
     [SerializeField]
     private BarScript healthbar, manabar;

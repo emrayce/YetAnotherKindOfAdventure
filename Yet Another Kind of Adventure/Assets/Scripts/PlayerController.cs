@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     private void DisplayTarget(GameObject target)
     {
-            Unit unit = target.GetComponent<Unit>();
+            Fighter unit = target.GetComponent<Fighter>();
             targetBarScript.SetUnit(unit);
             targetBar.SetActive(true);
     }
