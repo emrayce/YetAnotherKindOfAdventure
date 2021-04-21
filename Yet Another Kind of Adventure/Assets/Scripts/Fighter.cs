@@ -17,6 +17,15 @@ public class Fighter : Unit
     [SerializeField]
     protected float range;
 
+    private Fighter target;
+
+
+    private int weaponAtk = 5;
+    private int armor = 0;
+
+    [SerializeField]
+    private float attackSpeed;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -58,6 +67,32 @@ public class Fighter : Unit
     }
 
 
+    #region FightSystem
+
+    private int BasicAtkDamage()
+    {
+        return Mathf.CeilToInt(weaponAtk * 0.25f * strength);
+    }
+
+    public void DealDamage()
+    {
+        target.TakeDamage(BasicAtkDamage());
+    }
+
+    public void TakeDamage(int damage)
+    {
+        // Unit wil always take 1 damage when being attacked
+        int value = damage == armor ? 1 : damage - armor;
+        int newhp = hp < damage ? 0 : hp - damage;
+        SetHealth(newhp);
+    }
+
+    public void SetTarget(Fighter fighter)
+    {
+        target = fighter;
+    }
+    #endregion
+
     #region Getter
     public int GetHpMax()
     {
@@ -82,6 +117,11 @@ public class Fighter : Unit
     public float GetRange()
     {
         return range;
+    }
+
+    public float GetAttackSpeed()
+    {
+        return attackSpeed;
     }
 
     #endregion

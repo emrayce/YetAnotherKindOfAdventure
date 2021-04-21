@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private const int GroundLayer = 8;
     private const int UnitsLayer = 9;
 
+    private float lastAttack;
+
+
 
     protected void FixedUpdate()
     {
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
                     {
                         if (target.CompareTag("Enemy"))
                         {
+                            player.SetTarget(target.GetComponent<Fighter>());
+
                             // if too far from the enemy move towards him
                             if (Vector3.Distance(player.transform.position, hit.point) > player.GetRange())
                             {
@@ -64,6 +69,12 @@ public class PlayerController : MonoBehaviour
                             else
                             {
                                 // Attack
+                                if (Time.time - lastAttack >= player.GetAttackSpeed())
+                                {
+                                    Debug.Log("attack time :" + Time.time);
+                                    lastAttack = Time.time;
+                                    player.DealDamage();
+                                }
                             }
                         }
                     }
