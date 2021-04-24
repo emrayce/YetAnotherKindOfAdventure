@@ -71,9 +71,7 @@ public class PlayerController : MonoBehaviour
                                 // Attack
                                 if (Time.time - lastAttack >= player.GetAttackSpeed())
                                 {
-                                    Debug.Log("attack time :" + Time.time);
-                                    lastAttack = Time.time;
-                                    player.DealDamage();
+                                    StartCoroutine( Attack());
                                 }
                             }
                         }
@@ -87,6 +85,17 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    IEnumerator Attack()
+    {
+        AnimationClip[] animations = player.GetAnimator().runtimeAnimatorController.animationClips;
+        lastAttack = Time.time;
+        player.GetAnimator().Play("Player|Attack");
+        //player.GetAnimator().SetBool("Attack", true);
+        yield return new WaitForSeconds(animations[1].length);
+        player.DealDamage();
+        //player.GetAnimator().SetBool("Attack", false);
     }
 
     private void DisplayTarget(GameObject target)
