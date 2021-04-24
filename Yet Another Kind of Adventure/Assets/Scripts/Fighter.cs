@@ -27,6 +27,7 @@ public class Fighter : Unit
     private float attackSpeed;
 
 
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -85,6 +86,14 @@ public class Fighter : Unit
         int value = damage == armor ? 1 : damage - armor;
         int newhp = hp < damage ? 0 : hp - damage;
         SetHealth(newhp);
+    }
+
+    public IEnumerator BasicAttack()
+    {
+        AnimationClip[] animations = animator.runtimeAnimatorController.animationClips;
+        animator.Play("Player|Attack");
+        yield return new WaitForSeconds(animations[1].length);
+        target.TakeDamage(BasicAtkDamage());
     }
 
     public void SetTarget(Fighter fighter)

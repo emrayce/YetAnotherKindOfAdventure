@@ -66,15 +66,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Attack()
-    {
-        AnimationClip[] animations = player.GetAnimator().runtimeAnimatorController.animationClips;
-        lastAttack = Time.time;
-        player.GetAnimator().Play("Player|Attack");
-        yield return new WaitForSeconds(animations[1].length);
-        player.DealDamage();
-    }
-
     private void DisplayTarget(GameObject target)
     {
             Fighter unit = target.GetComponent<Fighter>();
@@ -106,7 +97,8 @@ public class PlayerController : MonoBehaviour
                     // Attack
                     if (Time.time - lastAttack >= player.GetAttackSpeed())
                     {
-                        StartCoroutine(Attack());
+                        StartCoroutine(player.BasicAttack());
+                        lastAttack = Time.time;
                     }
                 }
             }
