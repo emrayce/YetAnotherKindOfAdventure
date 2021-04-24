@@ -71,10 +71,8 @@ public class PlayerController : MonoBehaviour
         AnimationClip[] animations = player.GetAnimator().runtimeAnimatorController.animationClips;
         lastAttack = Time.time;
         player.GetAnimator().Play("Player|Attack");
-        //player.GetAnimator().SetBool("Attack", true);
         yield return new WaitForSeconds(animations[1].length);
         player.DealDamage();
-        //player.GetAnimator().SetBool("Attack", false);
     }
 
     private void DisplayTarget(GameObject target)
@@ -103,6 +101,8 @@ public class PlayerController : MonoBehaviour
                 // if enemy is in player's range stop moving and attack him
                 else
                 {
+                    // Look at the target
+                    transform.LookAt(target.transform.position);
                     // Attack
                     if (Time.time - lastAttack >= player.GetAttackSpeed())
                     {
