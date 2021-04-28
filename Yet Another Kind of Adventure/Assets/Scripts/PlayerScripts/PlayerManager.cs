@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerController : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
 
     public LayerMask layers;
@@ -21,58 +20,68 @@ public class PlayerController : MonoBehaviour
 
     private float lastAttack;
 
-    private Vector3 mouse;
     private Ray castPoint;
     private RaycastHit hit;
 
+    private InputHandler inputHandler;
+    private PlayerMovement playerMovement;
+
+    private void Start()
+    {
+        inputHandler = gameObject.GetComponent<InputHandler>();
+        playerMovement = gameObject.GetComponent<PlayerMovement>();
+        player = gameObject.GetComponent<Player>();
+    }
 
 
+    // calling in fixed Update because motion is made by modifying directly
     protected void FixedUpdate()
     {
-        mouse = Input.mousePosition;
-        castPoint = Camera.main.ScreenPointToRay(mouse);
+        castPoint = inputHandler.MouseRay();
 
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            // handle specific UI interractions
-        }
-
-        else if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
+        // Handling players action when outside of the UI
+        if (!inputHandler.MouseOverUI()
+            & Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
         {
             GameObject target = hit.transform.gameObject;
-            switch (target.layer)
-            {
-                case GroundLayer:
-                    //handle pure movement;
-                    targetBar.SetActive(false);
-                    if (Input.GetMouseButton(0))
-                    {
-                        // cancel current attack
-                        //StopCoroutine(player.BasicAttack());
-                        player.MoveTo(hit.point);
-                    }
-                    break;
+            TargetHandler(target);
+        }
+    }
 
-                case UnitsLayer:
-                    // handle units interractions
-                    DisplayTarget(target);
-                    UnitInteraction(target);
-                    
-                    break;
+    private void TargetHandler(GameObject target)
+    {
+        switch (target.layer)
+        {
+            case GroundLayer:
+                //handle pure movement;
+                targetBar.SetActive(false);
+                if (Input.GetMouseButton(0))
+                {
+                    // cancel current attack
+                    //StopCoroutine(player.BasicAttack());
+                    playerMovement.MoveTo(hit.point);
+                }
+                break;
 
-                default:
-                    // do nothing for now (maybe put the UI here ?)
-                    Debug.Log("Hi " + target.name);
-                    break;
-            }
+            case UnitsLayer:
+                // handle units interractions
+                DisplayTarget(target);
+                UnitInteraction(target);
+
+                break;
+
+            default:
+                // do nothing for now (maybe put the UI here ?)
+                Debug.Log("Hi " + target.name);
+                break;
         }
     }
 
     private void DisplayTarget(GameObject target)
     {
-            Fighter unit = target.GetComponent<Fighter>();
-            targetBarScript.SetUnit(unit);
-            targetBar.SetActive(true);
+        Fighter unit = target.GetComponent<Fighter>();
+        targetBarScript.SetUnit(unit);
+        targetBar.SetActive(true);
     }
 
     private void UnitInteraction(GameObject target)
@@ -88,7 +97,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Physics.Raycast(target.transform.position, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                     {
-                        player.MoveTo(hit.point);
+                        playerMovement.MoveTo(hit.point);
                     }
                 }
                 // if enemy is in player's range stop moving and attack him

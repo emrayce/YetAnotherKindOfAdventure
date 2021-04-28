@@ -1219,6 +1219,7 @@ GameObject:
   - component: {fileID: 1638540594}
   - component: {fileID: 1638540596}
   - component: {fileID: 1638540597}
+  - component: {fileID: 1638540598}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1312,7 +1313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f0d66174bd2db42b3acd4162080648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1638540596}
   layers:
     serializedVersion: 2
     m_Bits: 768
@@ -1349,15 +1349,13 @@ MonoBehaviour:
   speed: 3
   animator: {fileID: 1638540597}
   hpMax: 100
-  manaMax: 100
+  attackSpeed: 1.5
   strength: 10
   agility: 10
   intelligence: 10
   range: 7
-  attackSpeed: 1.5
   healthbar: {fileID: 2144336332}
   manabar: {fileID: 403288871}
-  distanceBeforeRunning: 5
 --- !u!95 &1638540597
 Animator:
   serializedVersion: 3
@@ -1377,6 +1375,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!143 &1638540598
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638540589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1783161053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +1541,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d020abefe66f76e4fb0b40cbfc9aa962,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d020abefe66f76e4fb0b40cbfc9aa962, type: 3}
 --- !u!1 &2047233415 stripped
@@ -1548,15 +1569,13 @@ MonoBehaviour:
   speed: 5
   animator: {fileID: 2047233418}
   hpMax: 100
-  manaMax: 100
+  attackSpeed: 1.5
   strength: 10
   agility: 10
   intelligence: 10
   range: 5
-  attackSpeed: 1.5
   healthbar: {fileID: 2144336332}
   manabar: {fileID: 403288871}
-  distanceBeforeRunning: 6
 --- !u!114 &2047233417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,7 +1588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f0d66174bd2db42b3acd4162080648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2047233416}
   layers:
     serializedVersion: 2
     m_Bits: 768
@@ -1616,6 +1634,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2047233421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047233415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed98860a5e6e9b46bed7b303b44d65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2047233422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047233415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3fd0340c5c7a440afa7c6eaabd6098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!114 &2144336332 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7274735983918030677, guid: 788ce8e4e6b23a54fa13c30fa8b675ef,
@@ -1649,6 +1692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835299010023730598, guid: 009d71b189cedd24abdf1c7cfb802d22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7197662720425204817, guid: 009d71b189cedd24abdf1c7cfb802d22,
         type: 3}

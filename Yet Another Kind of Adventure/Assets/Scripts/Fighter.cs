@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class Fighter : Unit
 {
+    [Header("Fighter Stats")]
+
     [SerializeField]
-    protected int hpMax, manaMax;
- 
+    protected int hpMax;
+    protected int manaMax;
     protected int hp, mana;
-    
+
+    [SerializeField]
+    private float attackSpeed;
+
     [SerializeField]
     protected int strength, agility, intelligence;
 
@@ -23,8 +28,6 @@ public class Fighter : Unit
     private int weaponAtk = 5;
     private int armor = 0;
 
-    [SerializeField]
-    private float attackSpeed;
 
 
 
