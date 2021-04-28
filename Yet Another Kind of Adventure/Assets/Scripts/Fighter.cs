@@ -96,6 +96,13 @@ public class Fighter : Unit
         target.TakeDamage(BasicAtkDamage());
     }
 
+    public void Attack()
+    {
+        AnimationClip[] animations = animator.runtimeAnimatorController.animationClips;
+        animator.Play("Player|Attack");
+        target.TakeDamage(BasicAtkDamage());
+    }
+
     public void SetTarget(Fighter fighter)
     {
         target = fighter;

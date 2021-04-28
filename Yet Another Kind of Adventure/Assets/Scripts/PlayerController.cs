@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
                     targetBar.SetActive(false);
                     if (Input.GetMouseButton(0))
                     {
+                        // cancel current attack
+                        //StopCoroutine(player.BasicAttack());
                         player.MoveTo(hit.point);
                     }
                     break;
@@ -97,7 +99,8 @@ public class PlayerController : MonoBehaviour
                     // Attack
                     if (Time.time - lastAttack >= player.GetAttackSpeed())
                     {
-                        StartCoroutine(player.BasicAttack());
+                        //StartCoroutine(player.BasicAttack());
+                        player.Attack();
                         lastAttack = Time.time;
                     }
                 }
