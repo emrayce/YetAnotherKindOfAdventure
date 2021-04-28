@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
 
     public LayerMask layers;
@@ -25,12 +24,13 @@ public class PlayerManager : MonoBehaviour
     private RaycastHit hit;
 
     private InputHandler inputHandler;
-    PlayerMovement playerMovement;
+    private PlayerMovement playerMovement;
 
     private void Start()
     {
         inputHandler = gameObject.GetComponent<InputHandler>();
         playerMovement = gameObject.GetComponent<PlayerMovement>();
+        player = gameObject.GetComponent<Player>();
     }
 
 
