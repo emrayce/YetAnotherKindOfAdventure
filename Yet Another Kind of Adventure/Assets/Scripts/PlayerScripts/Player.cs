@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : Fighter
 {
+    [Header("Player Settings")]
     [SerializeField]
-    private BarScript healthbar, manabar;
-
-
-    public float distanceBeforeRunning;
+    private BarScript healthbar;
+    [SerializeField]
+    private BarScript manabar;
 
     // Start is called before the first frame update
     protected override void Start()
