@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class InputHandler : MonoBehaviour
 {
@@ -11,5 +13,10 @@ public class InputHandler : MonoBehaviour
         mouse = Input.mousePosition;
 
         return Camera.main.ScreenPointToRay(mouse);
+    }
+
+    public bool MouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }

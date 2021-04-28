@@ -34,52 +34,54 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
+    // calling in fixed Update because motion is made by modifying directly
     protected void FixedUpdate()
     {
         castPoint = inputHandler.MouseRay();
 
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            // handle specific UI interractions
-        }
-
-        else if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
+        // Handling players action when outside of the UI
+        if (!inputHandler.MouseOverUI()
+            & Physics.Raycast(castPoint, out hit, Mathf.Infinity, layers))
         {
             GameObject target = hit.transform.gameObject;
-            switch (target.layer)
-            {
-                case GroundLayer:
-                    //handle pure movement;
-                    targetBar.SetActive(false);
-                    if (Input.GetMouseButton(0))
-                    {
-                        // cancel current attack
-                        //StopCoroutine(player.BasicAttack());
-                        playerMovement.MoveTo(hit.point);
-                    }
-                    break;
+            TargetHandler(target);
+        }
+    }
 
-                case UnitsLayer:
-                    // handle units interractions
-                    DisplayTarget(target);
-                    UnitInteraction(target);
-                    
-                    break;
+    private void TargetHandler(GameObject target)
+    {
+        switch (target.layer)
+        {
+            case GroundLayer:
+                //handle pure movement;
+                targetBar.SetActive(false);
+                if (Input.GetMouseButton(0))
+                {
+                    // cancel current attack
+                    //StopCoroutine(player.BasicAttack());
+                    playerMovement.MoveTo(hit.point);
+                }
+                break;
 
-                default:
-                    // do nothing for now (maybe put the UI here ?)
-                    Debug.Log("Hi " + target.name);
-                    break;
-            }
+            case UnitsLayer:
+                // handle units interractions
+                DisplayTarget(target);
+                UnitInteraction(target);
+
+                break;
+
+            default:
+                // do nothing for now (maybe put the UI here ?)
+                Debug.Log("Hi " + target.name);
+                break;
         }
     }
 
     private void DisplayTarget(GameObject target)
     {
-            Fighter unit = target.GetComponent<Fighter>();
-            targetBarScript.SetUnit(unit);
-            targetBar.SetActive(true);
+        Fighter unit = target.GetComponent<Fighter>();
+        targetBarScript.SetUnit(unit);
+        targetBar.SetActive(true);
     }
 
     private void UnitInteraction(GameObject target)
