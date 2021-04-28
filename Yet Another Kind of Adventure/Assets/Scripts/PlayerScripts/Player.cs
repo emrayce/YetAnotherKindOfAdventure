@@ -40,17 +40,7 @@ public class Player : Fighter
         }
     }
 
-    public void MoveTo(Vector3 position)
-    {
-        float step = speed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, position) > distanceBeforeRunning)
-        {
-            step *= 2;
-        }
-
-        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-        transform.position = Vector3.MoveTowards(transform.position, position, step);
-    }
+   
 
 
     // Call it when modifying current health (eg: taking damage)

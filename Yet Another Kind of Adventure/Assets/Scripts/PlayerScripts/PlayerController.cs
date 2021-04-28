@@ -21,15 +21,16 @@ public class PlayerController : MonoBehaviour
 
     private float lastAttack;
 
-    private Vector3 mouse;
     private Ray castPoint;
     private RaycastHit hit;
 
     private InputHandler inputHandler;
+    PlayerMovement playerMovement;
 
     private void Start()
     {
         inputHandler = gameObject.GetComponent<InputHandler>();
+        playerMovement = gameObject.GetComponent<PlayerMovement>();
     }
 
 
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
                     {
                         // cancel current attack
                         //StopCoroutine(player.BasicAttack());
-                        player.MoveTo(hit.point);
+                        playerMovement.MoveTo(hit.point);
                     }
                     break;
 
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (Physics.Raycast(target.transform.position, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
                     {
-                        player.MoveTo(hit.point);
+                        playerMovement.MoveTo(hit.point);
                     }
                 }
                 // if enemy is in player's range stop moving and attack him

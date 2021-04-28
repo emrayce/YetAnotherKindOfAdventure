@@ -6,7 +6,7 @@ public class InputHandler : MonoBehaviour
 {
     private Vector3 mouse;
 
-    public Ray MousePosition()
+    public Ray MouseRay()
     {
         mouse = Input.mousePosition;
 
