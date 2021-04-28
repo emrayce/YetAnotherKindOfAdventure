@@ -25,12 +25,18 @@ public class PlayerController : MonoBehaviour
     private Ray castPoint;
     private RaycastHit hit;
 
+    private InputHandler inputHandler;
+
+    private void Start()
+    {
+        inputHandler = gameObject.GetComponent<InputHandler>();
+    }
+
 
 
     protected void FixedUpdate()
     {
-        mouse = Input.mousePosition;
-        castPoint = Camera.main.ScreenPointToRay(mouse);
+        castPoint = inputHandler.MouseRay();
 
         if (EventSystem.current.IsPointerOverGameObject())
         {
