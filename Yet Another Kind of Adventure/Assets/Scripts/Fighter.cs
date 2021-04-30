@@ -9,6 +9,7 @@ public class Fighter : Unit
 
     [SerializeField]
     protected int hpMax;
+    [SerializeField]
     protected int manaMax;
     protected int hp, mana;
 
@@ -93,10 +94,15 @@ public class Fighter : Unit
 
     public IEnumerator BasicAttack()
     {
+        Debug.Log("call attack");
         AnimationClip[] animations = animator.runtimeAnimatorController.animationClips;
-        animator.Play("Player|Attack");
+        animator.SetBool("Attack", true);
         yield return new WaitForSeconds(animations[1].length);
+        animator.SetBool("Attack", false);
+
         target.TakeDamage(BasicAtkDamage());
+        //yield return new WaitForSeconds(animations[1].length / 2);
+        animator.SetBool("Attack", false);
     }
 
     public void Attack()

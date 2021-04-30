@@ -26,6 +26,10 @@ public class PlayerManager : MonoBehaviour
     private InputHandler inputHandler;
     private PlayerMovement playerMovement;
 
+
+    // store the routine the playerManager will have to manage
+    private Coroutine coroutine = null;
+
     private void Start()
     {
         inputHandler = gameObject.GetComponent<InputHandler>();
@@ -58,7 +62,14 @@ public class PlayerManager : MonoBehaviour
                 if (Input.GetMouseButton(0))
                 {
                     // cancel current attack
-                    //StopCoroutine(player.BasicAttack());
+                    if (player.GetAnimator().GetBool("Attack"))
+                    {
+                        Debug.Log("Stop attack");
+                        StopCoroutine(coroutine);
+                        StopCoroutine("BasicAttack");
+                        player.GetAnimator().SetBool("Attack", false);
+                    }
+
                     playerMovement.MoveTo(hit.point);
                 }
                 break;
@@ -108,8 +119,8 @@ public class PlayerManager : MonoBehaviour
                     // Attack
                     if (Time.time - lastAttack >= player.GetAttackSpeed())
                     {
-                        //StartCoroutine(player.BasicAttack());
-                        player.Attack();
+                        coroutine = StartCoroutine(player.BasicAttack());
+                        //player.Attack();
                         lastAttack = Time.time;
                     }
                 }
