@@ -1349,6 +1349,7 @@ MonoBehaviour:
   speed: 3
   animator: {fileID: 1638540597}
   hpMax: 100
+  manaMax: 0
   attackSpeed: 1.5
   strength: 10
   agility: 10
@@ -1569,6 +1570,7 @@ MonoBehaviour:
   speed: 5
   animator: {fileID: 2047233418}
   hpMax: 100
+  manaMax: 100
   attackSpeed: 1.5
   strength: 10
   agility: 10

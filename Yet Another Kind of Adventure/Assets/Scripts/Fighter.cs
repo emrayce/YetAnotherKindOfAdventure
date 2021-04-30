@@ -109,6 +109,7 @@ public class Fighter : Unit
     {
         AnimationClip[] animations = animator.runtimeAnimatorController.animationClips;
         animator.Play("Player|Attack");
+        animator.StopPlayback();
         target.TakeDamage(BasicAtkDamage());
     }
 
