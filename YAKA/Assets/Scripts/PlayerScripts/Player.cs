@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Unit
+public class Player : Fighter
 {
+    [Header("Player Settings")]
     [SerializeField]
-    private BarScript healthbar, manabar;
-
-
-    public float distanceBeforeRunning;
+    private BarScript healthbar;
+    [SerializeField]
+    private BarScript manabar;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -40,17 +40,7 @@ public class Player : Unit
         }
     }
 
-    public void MoveTo(Vector3 position)
-    {
-        float step = speed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, position) > distanceBeforeRunning)
-        {
-            step *= 2;
-        }
-
-        transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-        transform.position = Vector3.MoveTowards(transform.position, position, step);
-    }
+   
 
 
     // Call it when modifying current health (eg: taking damage)

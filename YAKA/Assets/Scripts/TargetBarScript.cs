@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TargetBarScript : BarScript
 {
     // The target unit that we display
-    private Unit target;
+    private Fighter target;
 
     [SerializeField]
     private Text targetName;
@@ -27,7 +27,7 @@ public class TargetBarScript : BarScript
         }
     }
 
-    public void SetUnit(Unit unit)
+    public void SetUnit(Fighter unit)
     {
         target = unit;
         targetName.text = unit.name;
