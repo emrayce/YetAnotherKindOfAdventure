@@ -1,3 +1,9 @@
+C'EST PAS PRATIQUE ><
+Devoir créer des branches à chaque fois pour faire des actions spécifiques c'est pas pratique quand on veut modifier des petits trucs
+Ou juste rajouter une anim ou un modèle 3D à chaque fois.
+
+Les règles vont changer mais d'abord je vais juste coder et avancer dans le projet
+
 Here are the rules that I need to respect for my commits:
 [LABEL]: [ISSUE]: [description]
 
