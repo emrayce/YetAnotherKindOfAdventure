@@ -102,14 +102,13 @@ public class Fighter : Unit
 
         target.TakeDamage(BasicAtkDamage());
         //yield return new WaitForSeconds(animations[1].length / 2);
-        animator.SetBool("Attack", false);
+       // animator.SetBool("Attack", false);
     }
 
     public void Attack()
     {
         AnimationClip[] animations = animator.runtimeAnimatorController.animationClips;
-        animator.Play("Player|Attack");
-        animator.StopPlayback();
+        animator.SetTrigger("Attack");
         target.TakeDamage(BasicAtkDamage());
     }
 
