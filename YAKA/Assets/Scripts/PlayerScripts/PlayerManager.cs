@@ -115,12 +115,13 @@ public class PlayerManager : MonoBehaviour
                 else
                 {
                     // Look at the target
-                    transform.LookAt(target.transform.position);
+                    Vector3 targetGrounded = new Vector3(target.transform.position.x, 0, target.transform.position.z);
+                    transform.LookAt(targetGrounded);
+
                     // Attack
                     if (Time.time - lastAttack >= player.GetAttackSpeed())
                     {
-                        coroutine = StartCoroutine(player.BasicAttack());
-                        //player.Attack();
+                        player.Attack();
                         lastAttack = Time.time;
                     }
                 }
