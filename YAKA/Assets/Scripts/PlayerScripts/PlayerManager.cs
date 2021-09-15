@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private TargetBarScript targetBarScript;
 
+    [SerializeField]
+    private Animator animator;
+
     // GameObject layers for raycast interractions
     private const int GroundLayer = 8;
     private const int UnitsLayer = 9;
@@ -61,17 +64,14 @@ public class PlayerManager : MonoBehaviour
                 targetBar.SetActive(false);
                 if (Input.GetMouseButton(0))
                 {
-                    // cancel current attack
-                    if (player.GetAnimator().GetBool("Attack"))
-                    {
-                        Debug.Log("Stop attack");
-                        StopCoroutine(coroutine);
-                        StopCoroutine("BasicAttack");
-                        player.GetAnimator().SetBool("Attack", false);
-                    }
-
                     playerMovement.MoveTo(hit.point);
+                    animator.SetBool("Running", true);
                 }
+                else
+                {
+                    animator.SetBool("Running", false);
+                }
+
                 break;
 
             case UnitsLayer:
@@ -84,6 +84,7 @@ public class PlayerManager : MonoBehaviour
             default:
                 // do nothing for now (maybe put the UI here ?)
                 Debug.Log("Hi " + target.name);
+                animator.SetBool("Running", false);
                 break;
         }
     }
@@ -114,6 +115,7 @@ public class PlayerManager : MonoBehaviour
                 // if enemy is in player's range stop moving and attack him
                 else
                 {
+                    
                     // Look at the target
                     Vector3 targetGrounded = new Vector3(target.transform.position.x, 0, target.transform.position.z);
                     transform.LookAt(targetGrounded);
