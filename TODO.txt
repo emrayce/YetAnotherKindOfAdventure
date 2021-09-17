@@ -1,3 +1,2 @@
-Give Rigidbody to player
 Improve player movement for non flat ground
 Text window for interactive pnj (inside world or not ?)
