@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     // GameObject layers for raycast interractions
     private const int GroundLayer = 8;
     private const int UnitsLayer = 9;
+    private const int InterractivePnj = 10;
 
     private float lastAttack;
 
@@ -79,6 +80,12 @@ public class PlayerManager : MonoBehaviour
                 DisplayTarget(target);
                 UnitInteraction(target);
 
+                break;
+
+            case InterractivePnj:
+                // handle pnj interractions
+                Debug.Log("Hi it's me pnj guy");
+                // TODO show a dialog
                 break;
 
             default:
