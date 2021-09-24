@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
 
+    [SerializeField]
     private RaycastHit hit;
 
     public void MoveTo(Vector3 position)
@@ -25,7 +26,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsGrounded())
         {
-            
+            Vector3 newPosition = transform.position;
+            newPosition.y = hit.point.y + 0.01f;
+            transform.position = newPosition;
         }
+    }
+
+    private void Update()
+    {
+        KeepGrounded();
     }
 }
