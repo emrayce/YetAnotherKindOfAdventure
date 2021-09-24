@@ -1,0 +1,7 @@
+Improve player movement for non flat ground
+  - Player need to sticks to the ground
+  - Searching for better way than collider to avoid player to move where he should'nt
+  - Stairs case
+
+Text window for interactive pnj (inside world or not ?)
+Implement others interactions with environment (object)
